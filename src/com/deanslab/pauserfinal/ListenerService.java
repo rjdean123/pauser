@@ -35,7 +35,7 @@ public class ListenerService extends Service implements RecognitionListener {
 		try {
 			NAME = intent.getStringExtra("NAME");
 		} catch (Exception e) {
-			//text.setText("ERROR: " + e.getMessage());
+			//text.setText("ERROR: " + e.getMessage());  TODO handle exception appropriately
 		}
 		
 		//initializing recognizer in background
@@ -111,6 +111,7 @@ public class ListenerService extends Service implements RecognitionListener {
     	}		
 	}
 	
+    /* restarts recognition service */
     private void switchSearch(String searchName) {
     	try {
     		recognizer.stop();
@@ -120,6 +121,7 @@ public class ListenerService extends Service implements RecognitionListener {
     	}
     }
     
+    /* initializes recognition agent */
     private void setupRecognizer(File assetsDir) {
     	File modelsDir = new File (assetsDir, "models");
         recognizer = defaultSetup()
@@ -132,8 +134,8 @@ public class ListenerService extends Service implements RecognitionListener {
         recognizer.addKeyphraseSearch("namesearch", NAME);
     }
     
+    /* attempts to pause the music */
     private void pauseCalled() {
-    	//((TextView) findViewById(R.id.textField)).setText("PAUSED");
     	AudioManager mAudioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
         if (mAudioManager.isMusicActive()) {
         	Intent i = new Intent("com.android.music.musicservicecommand");

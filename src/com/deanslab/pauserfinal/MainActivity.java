@@ -31,6 +31,11 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
+	/*
+	 * launches background service when appropriate
+	 * params: View
+	 * returns: void
+	 */
 	public void listenClicked(View view) {
 		boolean on = ((ToggleButton) view).isChecked();
 		if (on) {
